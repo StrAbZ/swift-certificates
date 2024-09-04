@@ -252,6 +252,12 @@ extension Certificate.PublicKey {
     public var subjectPublicKeyInfoBytes: ArraySlice<UInt8> {
         SubjectPublicKeyInfo(self).key.bytes
     }
+
+    @inlinable
+    public var subjectPublicKeyInfoAlgorithm: String {
+        "\(SubjectPublicKeyInfo(self).algorithmIdentifier)"
+    }
+
     @inlinable
     public var parameter: String {
         let desc = SubjectPublicKeyInfo(self).algorithmIdentifier.parameters
