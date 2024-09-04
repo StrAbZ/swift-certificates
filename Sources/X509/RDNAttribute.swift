@@ -159,7 +159,11 @@ extension RelativeDistinguishedName.Attribute.Value: CustomStringConvertible {
                 do {
                     text = try String(ASN1UTF8String(asn1Any: any))
                 } catch {
-                    text = String(describing: any)
+                    do {
+                        text = try String(ASN1IA5String(asn1Any: any))
+                    } catch {
+                        text = String(describing: any)
+                    }
                 }
             }
         }
@@ -225,6 +229,8 @@ extension RelativeDistinguishedName.Attribute: CustomStringConvertible {
             attributeKey = "OU"
         case .RDNAttributeType.streetAddress:
             attributeKey = "STREET"
+        case .NameAttributes.emailAddress:
+            attributeKey = "emailAddress"
         case let type:
             attributeKey = String(describing: type)
         }
