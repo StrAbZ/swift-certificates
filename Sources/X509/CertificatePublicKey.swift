@@ -287,6 +287,20 @@ extension Certificate.PublicKey {
         }
         return nil
     }
+
+    @inlinable
+    public var keySize: Int {
+        switch self.backing {
+        case .p256(let publicKey):
+            return publicKey.rawRepresentation.count * 4 // Only one dimension
+        case .p384(let publicKey):
+            return publicKey.rawRepresentation.count * 4
+        case .p521(let publicKey):
+            return publicKey.rawRepresentation.count * 4
+        case .rsa(let publicKey):
+            return publicKey.keySizeInBits
+        }
+    }
 }
 
 extension _RSA.Signing.Padding {
