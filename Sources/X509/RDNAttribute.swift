@@ -231,6 +231,8 @@ extension RelativeDistinguishedName.Attribute: CustomStringConvertible {
             attributeKey = "STREET"
         case .NameAttributes.emailAddress:
             attributeKey = "emailAddress"
+        case .RDNAttributeType.uid:
+            attributeKey = "UID"
         case let type:
             attributeKey = String(describing: type)
         }
@@ -329,6 +331,8 @@ extension ASN1ObjectIdentifier {
         /// information from a postal address (i.e., the street name, place,
         /// avenue, and the house number).
         public static let streetAddress: ASN1ObjectIdentifier = [2, 5, 4, 9]
+
+        public static let uid: ASN1ObjectIdentifier = [0, 9, 2342, 19_200_300, 100, 1, 1]
     }
 }
 
