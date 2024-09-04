@@ -133,6 +133,10 @@ public struct Certificate {
     /// This signature is computed over ``tbsCertificateBytes``.
     public let signature: Signature
 
+    public var signatureContentBytes: ArraySlice<UInt8> {
+        ASN1OctetString(signature).bytes
+    }
+
     /// The signature algorithm used to produce ``signature-swift.property``.
     public let signatureAlgorithm: SignatureAlgorithm
 
