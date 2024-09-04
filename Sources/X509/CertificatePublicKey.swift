@@ -252,6 +252,23 @@ extension Certificate.PublicKey {
     public var subjectPublicKeyInfoBytes: ArraySlice<UInt8> {
         SubjectPublicKeyInfo(self).key.bytes
     }
+    @inlinable
+    public var modulus: ArraySlice<UInt8>? {
+        let bytes = SubjectPublicKeyInfo(self).key.bytes
+        if let key = try? RSAPKCS1PublicKey(derEncoded: bytes) {
+            return key.modulus
+        }
+        return nil
+    }
+
+    @inlinable
+    public var publicExponent: ArraySlice<UInt8>? {
+        let bytes = SubjectPublicKeyInfo(self).key.bytes
+        if let key = try? RSAPKCS1PublicKey(derEncoded: bytes) {
+            return key.publicExponent
+        }
+        return nil
+    }
 }
 
 extension _RSA.Signing.Padding {
