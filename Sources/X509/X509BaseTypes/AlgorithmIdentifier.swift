@@ -239,6 +239,8 @@ extension AlgorithmIdentifier: CustomStringConvertible {
             return "sha384"
         case .sha512, .sha512UsingNil:
             return "sha512"
+        case .rsaKey:
+            return "rsaEncryption"
         default:
             return "AlgorithmIdentifier(\(self.algorithm) - \(String(reflecting: self.parameters)))"
         }
@@ -250,7 +252,16 @@ extension AlgorithmIdentifier: CustomStringConvertible {
             return nil
         }
 
-        return object.description
+        switch object {
+        case .NamedCurves.secp256r1:
+            return "secp256r1"
+        case .NamedCurves.secp384r1:
+            return "secp384r1"
+        case .NamedCurves.secp521r1:
+            return "secp521r1"
+        default:
+            return object.description
+        }
     }
 }
 
