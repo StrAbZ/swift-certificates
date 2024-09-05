@@ -261,20 +261,6 @@ extension Certificate.PublicKey {
     @inlinable
     public var parameter: String? {
         return SubjectPublicKeyInfo(self).algorithmIdentifier.parameterDescription
-//        let desc = SubjectPublicKeyInfo(self).algorithmIdentifier.parameters
-//        var serializer = DER.Serializer()
-//        try? desc?.serialize(into: &serializer)
-//        let object = try? ASN1ObjectIdentifier(derEncoded: serializer.serializedBytes)
-//
-//        switch object {
-//        case .NamedCurves.secp256r1:
-//            return "secp256r1"
-//        case .NamedCurves.secp384r1:
-//            return "secp384r1"
-//        case .NamedCurves.secp521r1:
-//            return "secp521r1"
-//        default: return desc?.description ?? ""
-//        }
     }
 
     @inlinable
