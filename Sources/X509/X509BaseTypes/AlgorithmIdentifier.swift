@@ -243,6 +243,15 @@ extension AlgorithmIdentifier: CustomStringConvertible {
             return "AlgorithmIdentifier(\(self.algorithm) - \(String(reflecting: self.parameters)))"
         }
     }
+
+    @usableFromInline
+    var parameterDescription: String? {
+        guard let parameters, let object = try? ASN1ObjectIdentifier(asn1Any: parameters) else {
+            return nil
+        }
+
+        return object.description
+    }
 }
 
 // Relevant note: the PKCS1v1.5 versions need to treat having no parameters and a NULL parameters as identical. This is probably general,
